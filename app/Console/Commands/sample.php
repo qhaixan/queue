@@ -42,8 +42,6 @@ class sample extends Command
         for ($i=0; $i < $count; $i++) { 
             sampleJob::dispatch($i);
         }
-        
-        $this->call('queue:work');
         return 0;
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Support\Facades\Log;
 class sampleJob implements ShouldQueue
@@ -32,5 +33,10 @@ class sampleJob implements ShouldQueue
     public function handle()
     {
         Log::info($this->i);
+        
+        $data = DB::table('logs')->insert(
+            ['param' => $this->i]
+        );
+
     }
 }

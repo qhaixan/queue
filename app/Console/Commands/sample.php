@@ -40,7 +40,7 @@ class sample extends Command
     {
         $count = $this->argument('count');
         for ($i=0; $i < $count; $i++) { 
-            sampleJob::dispatchAfterResponse($i);
+            sampleJob::dispatch($i);
         }
         return 0;
     }

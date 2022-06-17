@@ -12,7 +12,7 @@ class sample2 extends Command
      *
      * @var string
      */
-    protected $signature = 'check:queue';
+    protected $signature = 'check:queue {--failed}';
 
     /**
      * The console command description.
@@ -38,7 +38,13 @@ class sample2 extends Command
      */
     public function handle()
     {
-        $data = DB::table('jobs')->get();
+        $failed = $this->option('failed');
+        if (!$failed) {
+            $data = DB::table('jobs')->get();
+        } else {
+            $data = DB::table('failed_jobs')->get();
+        }
+
         $this->info(json_encode(['count'=>sizeof($data), 'data'=> $data]));
     }
 }
